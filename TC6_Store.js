@@ -1,16 +1,31 @@
-const {Builder,By,Key,until} = require("selenium-webdriver"); 
-const by = require("selenium-webdriver/lib/by");
-
-async function tienda6(){
-    //Test case 6.
-    let driver = await new Builder().forBrowser("firefox").build();
-    await driver.get("http://intothezone.com/#/");
-    //Click para ingresar en el apartado tienda
-    await driver.findElement(By.xpath("/html/body/div/div[1]/div/div[1]/a")).click();
-    //Click ver producto
-    await driver.wait(until.elementLocated(By.xpath("/html/body/div/div[2]/div/div[2]/div/div/div[1]/div/button[1]/a"))).click();
-    //Click en alguna categoria de producto
-    await driver.sleep(1000);
-    await driver.wait(until.elementLocated(By.xpath("/html/body/div/div[2]/div/div/div/div[2]/p[4]/button/a"))).click();
-
-}
+const { Builder, By, Key, until } = require("selenium-webdriver");
+describe("Test case 6", function () {
+    it("Estancia de los productos despues de refrescar la pagina", async function () {
+      let driver = await new Builder().forBrowser("chrome").build();
+      //Precondiciones test case 6
+      await driver.get("http://intothezone.com/#/tienda");
+      //Inicio de sesion
+      await driver.findElement(By.className("btn-login")).click();
+      await driver
+        .findElement(By.xpath("//*[@id='app']/div[3]/div/form/input[1]"))
+        .sendKeys("asd@asd.com");
+      await driver
+        .findElement(By.xpath("//*[@id='app']/div[3]/div/form/input[2]"))
+        .sendKeys("123");
+      await driver.findElement(By.className("button green")).click();
+      await driver.sleep(2500);
+      //Test case 6
+      //Agregar al carrito
+      await driver.wait(until.elementLocated(By.id("product_4"))).click();
+      await driver
+        .wait(until.elementLocated(By.className("button purple")))
+        .click();
+      await driver
+        .wait(until.elementLocated(By.className("btn-carrito")))
+        .click();
+      await driver.sleep(2000);
+      //Resfresh
+      await driver.navigate().refresh();
+      await driver.quit();
+    });
+  });

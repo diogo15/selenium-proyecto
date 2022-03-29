@@ -1,36 +1,22 @@
-const {Builder,By,Key,until} = require("selenium-webdriver"); 
-const by = require("selenium-webdriver/lib/by");
+const { Builder, By, Key, until } = require("selenium-webdriver");
 
-async function inicioSesion2(){
+describe("Test case 2", function () {
+  it("Inicio Sesion", async function () {
     // Test Case 2
-    let driver = await new Builder().forBrowser("firefox").build();
+    let driver = await new Builder().forBrowser("chrome").build();
     //Ingreso a la pagina
     await driver.get("http://intothezone.com/#/");
     //Click al perfil
-    await driver.findElement(By.xpath("/html/body/div/div[1]/div/div[2]/div")).click();
-    await driver.sleep(1000);
-    await driver.takeScreenshot().then(
-        function(image) {
-            require('fs').writeFileSync('ClickPerfil.png', image, 'base64');
-        }
-    );
-    await driver.sleep(100);
+    await driver.findElement(By.className("btn-login")).click();
     //Rellenar campo de correo y contraseña
-    await driver.findElement(By.xpath("/html/body/div/div[3]/div/form/input[1]")).sendKeys("asd@asd.com");
-    await driver.findElement(By.xpath("/html/body/div/div[3]/div/form/input[2]")).sendKeys("123");
-    await driver.sleep(1000);
-    await driver.takeScreenshot().then(
-        function(image) {
-            require('fs').writeFileSync('RellenarCampos.png', image, 'base64');
-        }
-    );
-    await driver.sleep(100);
-    //Click en iniciar sesion 
-    await driver.findElement(By.xpath("/html/body/div/div[3]/div/form/button[1]")).click();
-    await driver.sleep(2500);
-    await driver.takeScreenshot().then(
-        function(image) {
-            require('fs').writeFileSync('InicioSesion.png', image, 'base64');
-        }
-    );    
-}
+    await driver
+      .findElement(By.xpath("//*[@id='app']/div[3]/div/form/input[1]"))
+      .sendKeys("asd@asd.com");
+    await driver
+      .findElement(By.xpath("//*[@id='app']/div[3]/div/form/input[2]"))
+      .sendKeys("123");
+    //Click en iniciar sesion
+    await driver.findElement(By.className("button green")).click();
+    await driver.quit();
+  });
+});
