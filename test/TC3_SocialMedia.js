@@ -1,6 +1,7 @@
 const { Builder, By, until } = require("selenium-webdriver");
 var assert = require("assert");
 const ss = require("../pageObjects/screenshot");
+const params = require('../pageObjects/params');
 let driver;
 
 describe("Test Case 3", function () {
@@ -11,7 +12,7 @@ describe("Test Case 3", function () {
 
   it("Deberia ir a la pagina de facebook", async function () {
 
-    await driver.get("http://intothezone.com/");
+    await driver.get(params.baseUrl);
 
     const element = driver.findElement(By.id("link_fb"));
     assert.equal(await element.getAttribute("href"), "http://fb.com/");
@@ -21,7 +22,7 @@ describe("Test Case 3", function () {
 
   it("Deberia abrir correo", async function () {
 
-    await driver.get("http://intothezone.com/");
+    await driver.get(params.baseUrl);
 
     const element = driver.findElement(By.id("link_mailto"));
     assert.equal(await element.getAttribute("href"), "mailto:intothezone@gmaill.com");
@@ -30,7 +31,7 @@ describe("Test Case 3", function () {
 
   it("Deberia abrir llamada de telefono", async function () {
 
-    await driver.get("http://intothezone.com/");
+    await driver.get(params.baseUrl);
 
     const element = driver.findElement(By.id("link_tel"));
     assert.equal(await element.getAttribute("href"), "tel:50622456432");

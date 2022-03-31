@@ -1,4 +1,5 @@
 const { By } = require("selenium-webdriver");
+const params = require('../pageObjects/params');
 
 async function login(ventana,usuario,contrasena){
 
@@ -6,14 +7,14 @@ async function login(ventana,usuario,contrasena){
     
     //Rellenar campo de correo y contraseña
     await ventana
-      .findElement(By.id("loginEmail"))
+      .findElement(By.id(params.user_TF))
       .sendKeys(usuario);
     await ventana
-      .findElement(By.id("loginPassword"))
+      .findElement(By.id(params.pass_TF))
       .sendKeys(contrasena);
       
     //Click en iniciar sesion
-    await ventana.findElement(By.id("loginInit")).click();
+    await ventana.findElement(By.id(params.login_BTN)).click();
 }
 
 module.exports = { login };
