@@ -1,6 +1,6 @@
 const { Builder, By, Key, until } = require("selenium-webdriver");
 
-describe("Test case 13", function () {
+describe("Case 13 - Historial Pedidos", function () {
   it("Ver historial de pedidos", async function () {
     // Precondiciones Test Case 13.
     let driver = await new Builder().forBrowser("chrome").build();
@@ -34,6 +34,6 @@ describe("Test case 13", function () {
     //Test case 13
     //click historial de pedidos
     await driver.findElement(By.className("active btn-login")).click();
-    await driver.quit();
+    await driver.close();
   });
 });

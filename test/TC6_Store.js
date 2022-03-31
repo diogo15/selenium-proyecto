@@ -1,5 +1,5 @@
 const { Builder, By, Key, until } = require("selenium-webdriver");
-describe("Test case 6", function () {
+describe("Case 6 - Refrescar Productos", function () {
     it("Estancia de los productos despues de refrescar la pagina", async function () {
       let driver = await new Builder().forBrowser("chrome").build();
       //Precondiciones test case 6
@@ -26,6 +26,6 @@ describe("Test case 6", function () {
       await driver.sleep(2000);
       //Resfresh
       await driver.navigate().refresh();
-      await driver.quit();
+      await driver.close();
     });
   });

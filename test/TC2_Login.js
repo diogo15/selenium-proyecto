@@ -1,7 +1,7 @@
 const { Builder, By, Key, until } = require("selenium-webdriver");
 
-describe("Test case 2", function () {
-  it("Inicio Sesion", async function () {
+describe("Case 2 - Inicio de Sesión", function () {
+  it("Debería de iniciar sesión al usuario correctamente", async function () {
     // Test Case 2
     let driver = await new Builder().forBrowser("chrome").build();
     //Ingreso a la pagina
@@ -17,6 +17,6 @@ describe("Test case 2", function () {
       .sendKeys("123");
     //Click en iniciar sesion
     await driver.findElement(By.className("button green")).click();
-    await driver.quit();
+    await driver.close();
   });
 });

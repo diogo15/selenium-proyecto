@@ -1,7 +1,7 @@
 const { Builder, By, Key, until } = require("selenium-webdriver");
 
-describe('Test case 9',function(){
-    it('Disminuir cantidad de productos en elcarrito', async function(){
+describe('Case 9 - Disminuir Carrito',function(){
+    it('Disminuir cantidad de productos del carrito', async function(){
         let driver = await new Builder().forBrowser("chrome").build();
         // Precondiciones Test Case#9
         await driver.get("http://intothezone.com/#/tienda");
@@ -19,5 +19,7 @@ describe('Test case 9',function(){
         await driver.wait(until.elementLocated(By.className("button green"))).click();
         await driver.sleep(500);
         await driver.findElement(By.className("button purple")).click();
+
+        await driver.close();
     });
 });

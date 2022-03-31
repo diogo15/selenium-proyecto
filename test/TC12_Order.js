@@ -1,6 +1,6 @@
 const {Builder,By,Key,until} = require("selenium-webdriver"); 
 
-describe('Test case 12',function(){
+describe('Case 12 - Detalle Pedidos',function(){
     it('Ver datalles de los pedidos realizados', async function(){
         let driver = await new Builder().forBrowser("chrome").build();
         //Precondiciones test case 12
@@ -24,6 +24,6 @@ describe('Test case 12',function(){
         await driver.findElement(By.className("active btn-login")).click();
         // click ver detalles
        await driver.wait(until.elementLocated(By.className("button"))).click();
-       await driver.quit();  
+       await driver.close();  
     });  
 });
