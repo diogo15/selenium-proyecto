@@ -21,12 +21,11 @@ describe('Case 9 - Disminuir Carrito',function(){
           .click();
         //Dar click al botón de  "-".  
         await driver.wait(until.elementLocated(By.className("btn_menos"))).click();
-        let response = await driver.wait(until.elementLocated(By.xpath('/html/body/div/div[2]/div/section/div[2]/table/tbody/tr/td/p'))).getText();
+        let response = await driver.wait(until.elementLocated(By.id('emptyCart'))).getText();
         try{
             assert.equal(await response, 'Tu carrito esta vacio.....');
       
           }finally{
-              console.log('Funciono');
             await driver.quit();
           }
     });
