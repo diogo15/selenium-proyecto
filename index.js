@@ -1,28 +1,30 @@
-const { Builder, By, until, assert } = require("selenium-webdriver");
+const { Builder, By, until } = require("selenium-webdriver");
+var assert = require("assert");
 
 async function initQA() {
     
-    let driver = await new Builder().forBrowser("chrome").build();
-    var assert = require("assert");
-    await driver.get("http://intothezone.com/")
+    describe('Case Redes Sociales', function () {
+        describe('#Registro()', function () {
+            
+            it('Deberia ir a la pagina de facebook', async function () {
 
-    const element = driver.findElement(By.id('link_fb'));
-/*
-    if(await element.getAttribute("href") == "http://fb.com/"){
-        console.log("APPROVED: 1. Facebook Link Check");
-        assert.equal(value, 'selenium node automation');
-    }else{
-        console.log("REJECTED: 1. Facebook Link Check");
-        assert.equal(value, 'selenium node automation');
-    }
-   */
-    
-    assert.equal(await element.getAttribute("href"), 'http://fb.com/');
+                let driver = await new Builder().forBrowser("chrome").build();                
+                await driver.get("http://intothezone.com/")
 
-    //el.click();
+                
+                const element = driver.findElement(By.id('link_fb'));
+                assert.equal(await element.getAttribute("href"), 'http://fb.com/');
 
-    driver.quit();
+                await driver.quit();
+
+            });
+
+        });
+    });
+
 
 }
+
+
 
 initQA();
