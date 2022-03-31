@@ -1,4 +1,5 @@
 const { Builder, By, Key, until } = require("selenium-webdriver");
+var assert = require('assert');
 
 describe("Case 1 - Registro Usuario", function () {
   it("Debería de agregar un usuario exitosamente", async function () {
@@ -35,8 +36,13 @@ describe("Case 1 - Registro Usuario", function () {
       await driver.sleep(3000);
       await driver.findElement(By.id("submit_signup_data")).click();
 
+      let response = await driver.wait(until.elementLocated(By.id('signup_response')))
+        .getText();
+
+      assert.equal(await response, 'user added');
+
     } finally {
-      await driver.close();
+      await driver.quit();
     }
   });
 });
