@@ -6,7 +6,7 @@ describe("Case 6 - Refrescar Productos", function () {
       //Precondiciones test case 6
       await driver.get("http://intothezone.com/#/tienda");
       //Inicio de sesion
-      const login = require('../pageObjects/login');
+      await login.login(driver,"asd@asd.com","123")
       await driver.sleep(2500);
       //Test case 6
       //Agregar al carrito
