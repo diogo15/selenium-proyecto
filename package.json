@@ -4,7 +4,7 @@
   "description": "Pruebas automatizadas",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "mocha --no-timeouts"
   },
   "keywords": [
     "selenium",
@@ -13,6 +13,7 @@
   "author": "fidelitas",
   "license": "UNLICENSED",
   "dependencies": {
+    "mocha": "^9.2.2",
     "selenium-webdriver": "^4.1.1"
   }
 }
