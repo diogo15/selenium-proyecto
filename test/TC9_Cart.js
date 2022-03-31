@@ -1,25 +1,33 @@
 const { Builder, By, Key, until } = require("selenium-webdriver");
+const login = require('../pageObjects/login');
+var assert = require("assert");
 
 describe('Case 9 - Disminuir Carrito',function(){
     it('Disminuir cantidad de productos del carrito', async function(){
         let driver = await new Builder().forBrowser("chrome").build();
         // Precondiciones Test Case#9
         await driver.get("http://intothezone.com/#/tienda");
-         //Inicio de sesion
-        await driver.findElement(By.className("btn-login")).click();
-        await driver.findElement(By.xpath("//*[@id='app']/div[3]/div/form/input[1]")).sendKeys("asd@asd.com");
-        await driver.findElement(By.xpath("//*[@id='app']/div[3]/div/form/input[2]")).sendKeys("123");
-        await driver.findElement(By.className("button green")).click();
+        //Inicio de sesion
+        await login.login(driver,"asd@asd.com","123")
         await driver.sleep(2500);
-        //Realizar compra
+        //Agregar al carrito
         await driver.wait(until.elementLocated(By.id("product_4"))).click();
-        await driver.wait(until.elementLocated(By.className("button purple"))).click();
-        await driver.wait(until.elementLocated(By.className("btn-carrito"))).click();
-        await driver.wait(until.elementLocated(By.className("button green"))).click();
-        await driver.wait(until.elementLocated(By.className("button green"))).click();
-        await driver.sleep(500);
-        await driver.findElement(By.className("button purple")).click();
-
-        await driver.close();
+        await driver
+          .wait(until.elementLocated(By.className("button purple")))
+          .click();
+        //Ingresar al carrito
+        await driver
+          .wait(until.elementLocated(By.className("btn-carrito")))
+          .click();
+        //Dar click al botón de  "-".  
+        await driver.wait(until.elementLocated(By.className("btn_menos"))).click();
+        let response = await driver.wait(until.elementLocated(By.xpath('/html/body/div/div[2]/div/section/div[2]/table/tbody/tr/td/p'))).getText();
+        try{
+            assert.equal(await response, 'Tu carrito esta vacio.....');
+      
+          }finally{
+              console.log('Funciono');
+            await driver.quit();
+          }
     });
 });
