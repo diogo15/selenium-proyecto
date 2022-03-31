@@ -15,7 +15,7 @@
 async function screenshot(chrome,nombre){
     await chrome.takeScreenshot().then(
         function(image) {
-            require('fs').writeFileSync(nombre+".png", image, 'base64');
+            require('fs').writeFileSync("screenshots/"+nombre+".png", image, 'base64');
         }
     );
 }

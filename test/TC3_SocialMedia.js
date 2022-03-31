@@ -10,7 +10,7 @@ describe("Case Redes Sociales", function () {
     const element = driver.findElement(By.id("link_fb"));
     assert.equal(await element.getAttribute("href"), "http://fb.com/");
 
-    await ss.screenshot(driver, "hola");
+    await ss.screenshot(driver, "TC3_01");
 
     await driver.close();
   });
