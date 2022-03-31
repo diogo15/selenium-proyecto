@@ -1,5 +1,7 @@
 const { Builder, By, until } = require("selenium-webdriver");
 var assert = require("assert");
+const ss = require('../pageObjects/screenshot');
+
 
 async function initQA() {
     
@@ -15,6 +17,8 @@ async function initQA() {
                 const element = driver.findElement(By.id('link_fb'));
                 assert.equal(await element.getAttribute("href"), 'http://fb.com/');
 
+                await ss.screenshot(driver, 'hola');
+
                 await driver.quit();
 
             });
@@ -22,9 +26,8 @@ async function initQA() {
         });
     });
 
+    
 
 }
-
-
 
 initQA();
