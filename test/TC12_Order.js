@@ -3,7 +3,7 @@ const login = require('../pageObjects/login');
 const compra = require('../pageObjects/compra');
 
 describe('Case 12 - Detalle Pedidos',function(){
-    it('Ver datalles de los pedidos realizados', async function(){
+    it(' : Debería desplegar detalles de los pedidos realizados', async function(){
         let driver = await new Builder().forBrowser("chrome").build();
         //Precondiciones test case 12
         await driver.get("http://intothezone.com/#/tienda");

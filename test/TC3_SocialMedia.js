@@ -4,7 +4,7 @@ const ss = require("../pageObjects/screenshot");
 const params = require('../pageObjects/params');
 let driver;
 
-describe("Test Case 3", function () {
+describe("Case 3 - Navegar Links", function () {
 
   before(async function() {
     driver = await new Builder().forBrowser('chrome').build();
@@ -14,8 +14,8 @@ describe("Test Case 3", function () {
 
     await driver.get(params.baseUrl);
 
-    const element = driver.findElement(By.id("link_fb"));
-    assert.equal(await element.getAttribute("href"), "http://fb.com/");
+    var fb = driver.findElement(By.id("link_fb"));
+    assert.equal(await fb.getAttribute("href"), "http://fb.com/");
 
     await ss.screenshot(driver, "TC3_01");
   });
@@ -24,8 +24,8 @@ describe("Test Case 3", function () {
 
     await driver.get(params.baseUrl);
 
-    const element = driver.findElement(By.id("link_mailto"));
-    assert.equal(await element.getAttribute("href"), "mailto:intothezone@gmaill.com");
+    var mail = driver.findElement(By.id("link_mailto"));
+    assert.equal(await mail.getAttribute("href"), "mailto:intothezone@gmaill.com");
 
   });
 
@@ -33,8 +33,8 @@ describe("Test Case 3", function () {
 
     await driver.get(params.baseUrl);
 
-    const element = driver.findElement(By.id("link_tel"));
-    assert.equal(await element.getAttribute("href"), "tel:50622456432");
+    var tel = driver.findElement(By.id("link_tel"));
+    assert.equal(await tel.getAttribute('href'), "tel:50622456432");
 
   });
 
