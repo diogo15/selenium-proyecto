@@ -1,6 +1,9 @@
 const { Builder, By, Key, until } = require("selenium-webdriver");
-const login = require('../pageObjects/login');
-const compra = require('../pageObjects/compra');
+const login = require("../pageObjects/login");
+const compra = require("../pageObjects/compra");
+var assert = require("assert");
+var flag = new Boolean(false);
+
 
 describe("Case 13 - Historial Pedidos", function () {
   it("Ver historial de pedidos", async function () {
@@ -8,13 +11,22 @@ describe("Case 13 - Historial Pedidos", function () {
     let driver = await new Builder().forBrowser("chrome").build();
     await driver.get("http://intothezone.com/#/tienda");
     //Inicio de sesion
-    await login.login(driver,"asd@asd.com","123")
+    await login.login(driver, "asd@asd.com", "123");
     await driver.sleep(2500);
     //Realizar compra
-    await compra.compra(driver,"product_4");
+    await compra.compra(driver, "product_4");
     //Test case 13
     //click historial de pedidos
-    await driver.findElement(By.className("active btn-login")).click();
-    await driver.close();
+    await driver.findElement(By.id("btn_login_Active")).click();
+    
+    flag = await driver.wait(until.elementLocated(By.className('history'))).isEnabled();
+
+    try{
+      assert.equal(flag, true);
+    }finally{
+      await driver.quit();
+    }
+    
+      
   });
 });
