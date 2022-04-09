@@ -1,28 +1,31 @@
-const { Builder, Key,By, until } = require("selenium-webdriver");
-const login = require('../pageObjects/login');
+const { Builder, By, until } = require("selenium-webdriver");
+const fillData = require('../pageObjects/fill_inputs');
 const params = require('../pageObjects/params');
+const login_params = require("../pageObjects/login_params");
 var assert = require("assert");
+let driver;
 
 // Test Case 2
 describe("Test Case 2", function () {
-  it("Inicio Sesion", async function () {
-    
-    let driver = await new Builder().forBrowser("chrome").build();
+  before(async function () {
+    driver = await new Builder().forBrowser(params.browser).build();
+  });
+
+  it('Debería de iniciar sesión al usuario exitosamente', async function () {
     //Ingreso a la pagina
     await driver.get(params.baseUrl);
     
     //importamos el login
-    await login.login(driver, params.defaultUser, params.defaultUserPass)
+    await fillData.fill_inputs(driver, login_params.data);
+  });
 
-    let response = await driver.wait(until.elementLocated(By.id('loginMessage'))).getText();
+  after(async function () {
+    let response = await driver.wait(
+      until.elementLocated(By.id('loginMessage'))
+    ).getText();
+    
+    assert.equal(response, 'Ingreso Exitoso!');
 
-    try{
-
-      assert.equal(await response, 'Ingreso Exitoso!');
-
-    }finally{
-      await driver.quit();
-    }
-
+    await driver.close();
   });
 });

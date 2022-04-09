@@ -1,17 +1,17 @@
-const PO = require ('../pageObjects/Base_Page');
-const SP = require ('../pageObjects/SignUp_Page');
-
-describe('PO Testing', function () {
-    it('#Get into URL - Via PO', async function () {
-        let functions = new SP.SignUp_Page();
-
-        try {
-
-            await functions.get_into('http://intothezone.com');
-
-        } finally {
-            await functions.close_instance();
-        }
- 
-    });
+let should = require('should');
+describe('Suite A', function () {
+  it('Foo', function (done) {
+    setTimeout(function () {
+      (true).should.equal(true);
+      done();
+    }, 1000);
+  });
+  it('Bar', function () {
+    (true).should.equal(true);
+  });
+});
+describe('Suite B', function () {
+  it('Foo', function () {
+    (true).should.equal(true);
+  });
 });
