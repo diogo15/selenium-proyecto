@@ -7,15 +7,13 @@ let driver;
 describe("Case 1 - Registro Usuario", function () {
   before(async function () {
     driver = await new Builder().forBrowser("chrome").build();
+
+    await driver.get(params.baseUrl);
   });
 
   it("Debería de agregar un usuario exitosamente", async function () {
-    await driver.get(params.baseUrl);
-
     await driver.findElement(By.id("btn_carrito")).click();
-    await driver.sleep(1000);
-
-    await driver.findElement(By.linkText("Registro")).click();
+    await driver.wait(until.elementLocated(By.linkText('Registro'))).click();
 
     let inputs = await driver.findElements(By.xpath("//input"));
 
@@ -25,16 +23,15 @@ describe("Case 1 - Registro Usuario", function () {
 
     await driver.findElement(By.id('submit_signup_data')).click();
 
-  });
-
-  after (async function () {
     let response = await driver.wait(
       until.elementLocated(By.id('signup_response'))
-    ).getText();
+    ).getText().then(function (value) {
+      return value;
+    });
 
     assert.equal(response, 'user added');
 
-    await driver.close();
+    await driver.quit();
 
   });
 });

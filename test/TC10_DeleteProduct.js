@@ -26,10 +26,9 @@ describe('Cases 10 - Eliminar Producto Carrito', function() {
         await driver.findElement(By.id('btn_carrito')).click();
 
         await driver.findElement(By.id('eliminar_product_1')).click();
-        await driver.sleep(1000);
     });
 
     after(async function () {
-        await driver.close();
+        await driver.quit();
     });
 });

@@ -39,7 +39,7 @@ describe("Case 3 - Navegar Links", function () {
   });
 
   after(async function() {
-    await driver.close();
+    await driver.quit();
   });
 
 });
