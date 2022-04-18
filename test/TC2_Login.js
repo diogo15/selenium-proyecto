@@ -1,7 +1,8 @@
 const { Builder, By, until } = require("selenium-webdriver");
-const fillData = require('../pageObjects/fill_inputs');
+const login = require('../pageObjects/login');
 const params = require('../pageObjects/params');
-const login_params = require("../pageObjects/login_params");
+const fillData = require('../pageObjects/fill_inputs');
+const login_data = require('../pageObjects/login_params');
 var assert = require("assert");
 let driver;
 
@@ -9,20 +10,23 @@ let driver;
 describe("Test Case 2", function () {
   before(async function () {
     driver = await new Builder().forBrowser(params.browser).build();
+    
+    //Ingreso a la pagina
+    await driver.get(params.baseUrl);
   });
 
   it('Debería de iniciar sesión al usuario exitosamente', async function () {
-    //Ingreso a la pagina
-    await driver.get(params.baseUrl);
     
+    await driver.findElement(By.className('btn-login')).click();
     //importamos el login
-    await fillData.fill_inputs(driver, login_params.data);
-  });
+    //await login.login(driver, params.defaultUser, params.defaultUserPass);
+    await fillData.fill_inputs(driver, login_data.data, params.login_submit);
 
-  after(async function () {
     let response = await driver.wait(
       until.elementLocated(By.id('loginMessage'))
-    ).getText();
+    ).getText().then(function (value) {
+      return value;
+    });
     
     assert.equal(response, 'Ingreso Exitoso!');
 

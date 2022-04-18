@@ -14,19 +14,26 @@ describe("Case 6 - Refrescar Productos", function () {
   });
 
   it('Step 1: Iniciar Sesión', async function () {
-    await fillData.fill_inputs(driver, login_params.data);
+    await driver.findElement(By.className('btn-login')).click();
+
+    await fillData.fill_inputs(driver, login_params.data, params.login_submit)
+      .then(function () {
+        driver.get(params.baseUrl + '#/tienda')
+          .then(function () {
+            driver.findElement(By.id('add_producto_1')).click();
+        });
+      });
   });
 
   it('Step 2: Agregar Productos', async function () {
     //Agregar al carrito
     await driver.get(params.baseUrl + '#/tienda');
     await driver.findElement(By.id('add_producto_1')).click();
-
-    await driver.findElement(By.id('btn-carrito')).click();
-    await driver.sleep(1000);
   });
 
   it('Debería de mantener los productos en el carrito después de refrescar', async function () {
+    await driver.findElement(By.id('btn-carrito')).click();
+    
     //Resfresh
     await driver.navigate().refresh();
 
