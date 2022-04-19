@@ -18,7 +18,7 @@ describe('Cases 10 - Eliminar Producto Carrito', function() {
             });
 
         await driver.get(params.baseUrl + '#/tienda');
-        await driver.sleep(1000);
+        await driver.sleep(2000);
 
         await driver.wait(
             until.elementLocated(By.id('add_producto_1'))
@@ -26,10 +26,16 @@ describe('Cases 10 - Eliminar Producto Carrito', function() {
 
         await driver.wait(until.elementLocated(By.id('btn_carrito'))).click();
 
+        await driver.sleep(2000);
+
         await driver.findElement(By.id('eliminar_product_1')).click();
+
+        await driver.sleep(1000);
+        
     });
 
-    /*after(async function () {
+    after(async function () {
         await driver.quit();
-    });*/
+    });
+    
 });
