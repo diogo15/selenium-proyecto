@@ -10,26 +10,26 @@ describe('Cases 10 - Eliminar Producto Carrito', function() {
 
         await driver.get(params.baseUrl);
     });
-
-    it('Step 1: Iniciar Sesión', async function () {
-        await driver.findElement(By.className('btn-login')).click()
-
-        await fillData.fill_inputs(driver, login_params.data, params.login_submit);
-    });
-
-    it('Step 2: Agregar Producto', async function () {
-        await driver.get(params.baseUrl + '#/tienda');
-
-        await driver.wait(until.elementLocated(By.id('add_producto_1'))).click();
-    });
     
     it('Debería de eliminar un producto del carrito', async function() {
-        await driver.findElement(By.id('btn_carrito')).click();
+        await driver.findElement(By.className('btn-login')).click()
+            .then(function () {
+                fillData.fill_inputs(driver, login_params.data, params.login_submit);
+            });
+
+        await driver.get(params.baseUrl + '#/tienda');
+        await driver.sleep(1000);
+
+        await driver.wait(
+            until.elementLocated(By.id('add_producto_1'))
+        ).click();
+
+        await driver.wait(until.elementLocated(By.id('btn_carrito'))).click();
 
         await driver.findElement(By.id('eliminar_product_1')).click();
     });
 
-    after(async function () {
+    /*after(async function () {
         await driver.quit();
-    });
+    });*/
 });

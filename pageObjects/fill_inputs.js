@@ -1,4 +1,4 @@
-const { By } = require("selenium-webdriver");
+const { By, until } = require("selenium-webdriver");
 const params = require("./params");
 
 async function fill_inputs (driver, data, btn_id) {
@@ -8,7 +8,7 @@ async function fill_inputs (driver, data, btn_id) {
       inputs[iterator].sendKeys(data[iterator]);
     }
 
-    await driver.findElement(By.id(btn_id)).click();
+    await driver.wait(until.elementLocated(By.id(btn_id))).click();
 }
 
 module.exports = { fill_inputs }
