@@ -34,13 +34,14 @@ describe("Case 6 - Refrescar Productos", function () {
 
     try {
       flag = await driver
-        .wait(until.elementLocated(By.id("emptyCart")))
+        .wait(until.elementLocated(By.id("cart-quantity")))
         .isEnabled();
     } catch (error) {
       console.error(error);
     }
 
-    assert.equal(flag, false);
+    assert.equal(flag, true);
+
     await driver.quit();
   });
 });
