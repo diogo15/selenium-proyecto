@@ -42,6 +42,6 @@ describe("Case 6 - Refrescar Productos", function () {
 
     assert.equal(flag, true);
 
-    //await driver.quit();
+    await driver.quit();
   });
 });
