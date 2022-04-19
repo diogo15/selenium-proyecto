@@ -20,10 +20,13 @@ describe('Case 9 - Disminuir Carrito',function(){
     await fillData.fill_inputs(driver, login_data.data, params.login_submit);
   
     //Agregar al carrito
+    await driver.sleep(2000);
     await driver.get(params.baseUrl + "#/tienda")
       .then(function () {
         addCarrito.add_to_cart(driver);
       });
+
+    await driver.sleep(1000)
   
     //Dar click al botón de  "-".  
     await driver.wait(

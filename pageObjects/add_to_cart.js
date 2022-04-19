@@ -11,6 +11,8 @@ async function add_to_cart(driver) {
         until.elementLocated(By.id("btn_carrito"))
     ).click();
 
+    await driver.sleep(1000)
+
 }
 
 module.exports = { add_to_cart }
